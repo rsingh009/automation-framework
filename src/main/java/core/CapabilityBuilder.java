@@ -1,5 +1,7 @@
 package core;
 
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 public class CapabilityBuilder {
 
     /**
@@ -77,7 +79,7 @@ public class CapabilityBuilder {
     /**
      * Move directly into Webview context. Default false
      */
-    private String autoWebview;
+    private boolean autoWebview;
 
     /**
      * Don't reset app state before this session. See here for more details
@@ -95,7 +97,7 @@ public class CapabilityBuilder {
      * The timings are then reported as events property on response to querying the current session.
      * See the event timing docs for the the structure of this response.
      */
-    private String eventTimings;
+    private boolean eventTimings;
 
     /**
      * (Web and webview only) Enable Chromedriver's (on Android) or Safari's (on iOS) performance
@@ -112,6 +114,7 @@ public class CapabilityBuilder {
      * Delete any generated files at the end of a session. Default to false
      */
     private boolean clearSystemFiles;
+
 
     //Property Methods
 
@@ -175,7 +178,7 @@ public class CapabilityBuilder {
         return this;
     }
 
-    public CapabilityBuilder setAutoWebview(String autoWebview) {
+    public CapabilityBuilder setAutoWebview(boolean autoWebview) {
         this.autoWebview = autoWebview;
         return this;
     }
@@ -190,7 +193,7 @@ public class CapabilityBuilder {
         return this;
     }
 
-    public CapabilityBuilder setEventTimings(String eventTimings) {
+    public CapabilityBuilder setEventTimings(boolean eventTimings) {
         this.eventTimings = eventTimings;
         return this;
     }
@@ -210,5 +213,27 @@ public class CapabilityBuilder {
         return this;
     }
 
-
+    public DesiredCapabilities build(){
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(CapabilityMapper.AUTOMATION_NAME, this.automationName);
+        capabilities.setCapability(CapabilityMapper.PLATFORM_NAME, this.automationName);
+        capabilities.setCapability(CapabilityMapper.PLATFORM_VERSION, this.automationName);
+        capabilities.setCapability(CapabilityMapper.DEVICE_NAME, this.automationName);
+        capabilities.setCapability(CapabilityMapper.APP_Path, this.automationName);
+        capabilities.setCapability(CapabilityMapper.OTHER_APPS, this.automationName);
+        capabilities.setCapability(CapabilityMapper.BROWSER_NAME, this.automationName);
+        capabilities.setCapability(CapabilityMapper.NEW_COMMAND_TIMEOUT, this.automationName);
+        capabilities.setCapability(CapabilityMapper.LANGUAGE, this.automationName);
+        capabilities.setCapability(CapabilityMapper.LOCALE, this.automationName);
+        capabilities.setCapability(CapabilityMapper.DEVICE_UDID, this.automationName);
+        capabilities.setCapability(CapabilityMapper.ORIENTATION, this.automationName);
+        capabilities.setCapability(CapabilityMapper.AUTO_WEB_VIEW, this.automationName);
+        capabilities.setCapability(CapabilityMapper.NO_RESET, this.automationName);
+        capabilities.setCapability(CapabilityMapper.FULL_RESET, this.automationName);
+        capabilities.setCapability(CapabilityMapper.EVENT_TIMINGS, this.automationName);
+        capabilities.setCapability(CapabilityMapper.ENABLE_PERFORMANCE_LOGGING, this.automationName);
+        capabilities.setCapability(CapabilityMapper.PRINT_PAGE_SOURCE_ON_FIND_FAILURE, this.automationName);
+        capabilities.setCapability(CapabilityMapper.CLEAR_SYSTEM_FILES, this.automationName);
+        return capabilities;
+    }
 }
