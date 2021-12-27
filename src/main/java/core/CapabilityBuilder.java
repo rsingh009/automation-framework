@@ -4,13 +4,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class CapabilityBuilder {
 
+    /*********** member variables ***********/
     /**
      * Which automation engine to use
      * Appium (default), or UiAutomator2, Espresso, or UiAutomator1 for Android,
      * or XCUITest or Instruments for iOS, or YouiEngine for application built with You.i Engine
      */
     private String automationName = "Appium";
-
 
     /**
      * Which mobile OS platform to use ex- iOS, Android, or FirefoxOS
@@ -116,8 +116,7 @@ public class CapabilityBuilder {
     private boolean clearSystemFiles;
 
 
-    //Property Methods
-
+    /*********** Property Methods ***********/
     public CapabilityBuilder setAutomationName(String automationName) {
         this.automationName = automationName;
         return this;
@@ -236,4 +235,5 @@ public class CapabilityBuilder {
         capabilities.setCapability(CapabilityMapper.CLEAR_SYSTEM_FILES, this.automationName);
         return capabilities;
     }
+
 }
