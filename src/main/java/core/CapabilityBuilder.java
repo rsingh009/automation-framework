@@ -9,16 +9,22 @@ public class CapabilityBuilder {
      * Which automation engine to use
      * Appium (default), or UiAutomator2, Espresso, or UiAutomator1 for Android,
      * or XCUITest or Instruments for iOS, or YouiEngine for application built with You.i Engine
+     *
+     * Note- this is required
      */
     private String automationName = "Appium";
 
     /**
      * Which mobile OS platform to use ex- iOS, Android, or FirefoxOS
+     *
+     * Note- this is required
      */
     private String platformName;
 
     /**
      * Mobile OS version e.g., 7.1, 4.4
+     *
+     * Note- this is required
      */
     private String platformVersion;
 
@@ -29,12 +35,16 @@ public class CapabilityBuilder {
      * the valid devices returned by instruments with instruments -s devices or
      * xctrace with xcrun xctrace list devices (since Xcode 12). On Android this
      * capability is currently ignored, though it remains required.
+     *
+     * Note- this is required
      */
     private String deviceName;
 
     /**
      * The absolute local path or remote http URL to a .ipa file (IOS), .app folder (IOS Simulator),
      * .apk file (Android) or .apks file (Android App Bundle), or a .zip file containing one of these.
+     *
+     * Note- this is required
      */
     private String appPath;
 
@@ -215,24 +225,36 @@ public class CapabilityBuilder {
     public DesiredCapabilities build(){
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(CapabilityMapper.AUTOMATION_NAME, this.automationName);
-        capabilities.setCapability(CapabilityMapper.PLATFORM_NAME, this.automationName);
-        capabilities.setCapability(CapabilityMapper.PLATFORM_VERSION, this.automationName);
-        capabilities.setCapability(CapabilityMapper.DEVICE_NAME, this.automationName);
-        capabilities.setCapability(CapabilityMapper.APP_Path, this.automationName);
-        capabilities.setCapability(CapabilityMapper.OTHER_APPS, this.automationName);
-        capabilities.setCapability(CapabilityMapper.BROWSER_NAME, this.automationName);
-        capabilities.setCapability(CapabilityMapper.NEW_COMMAND_TIMEOUT, this.automationName);
-        capabilities.setCapability(CapabilityMapper.LANGUAGE, this.automationName);
-        capabilities.setCapability(CapabilityMapper.LOCALE, this.automationName);
-        capabilities.setCapability(CapabilityMapper.DEVICE_UDID, this.automationName);
-        capabilities.setCapability(CapabilityMapper.ORIENTATION, this.automationName);
-        capabilities.setCapability(CapabilityMapper.AUTO_WEB_VIEW, this.automationName);
-        capabilities.setCapability(CapabilityMapper.NO_RESET, this.automationName);
-        capabilities.setCapability(CapabilityMapper.FULL_RESET, this.automationName);
-        capabilities.setCapability(CapabilityMapper.EVENT_TIMINGS, this.automationName);
-        capabilities.setCapability(CapabilityMapper.ENABLE_PERFORMANCE_LOGGING, this.automationName);
-        capabilities.setCapability(CapabilityMapper.PRINT_PAGE_SOURCE_ON_FIND_FAILURE, this.automationName);
-        capabilities.setCapability(CapabilityMapper.CLEAR_SYSTEM_FILES, this.automationName);
+        if(this.platformName==null || this.platformName.isEmpty()){
+            throw new RuntimeException("missing required fields");
+        }
+        capabilities.setCapability(CapabilityMapper.PLATFORM_NAME, this.platformName);
+        if (this.platformVersion==null || this.platformVersion.isEmpty()){
+            throw new RuntimeException("missing required fields");
+        }
+        capabilities.setCapability(CapabilityMapper.PLATFORM_VERSION, this.platformVersion);
+        if (this.deviceName==null || this.deviceName.isEmpty()){
+            throw new RuntimeException("missing required fields");
+        }
+        capabilities.setCapability(CapabilityMapper.DEVICE_NAME, this.deviceName);
+        if (this.appPath==null || this.appPath.isEmpty()){
+            throw new RuntimeException("missing required fields");
+        }
+        capabilities.setCapability(CapabilityMapper.APP_Path, this.appPath);
+        capabilities.setCapability(CapabilityMapper.OTHER_APPS, this.otherApps);
+        capabilities.setCapability(CapabilityMapper.BROWSER_NAME, this.browserName);
+        capabilities.setCapability(CapabilityMapper.NEW_COMMAND_TIMEOUT, this.newCommandTimeout);
+        capabilities.setCapability(CapabilityMapper.LANGUAGE, this.language);
+        capabilities.setCapability(CapabilityMapper.LOCALE, this.locale);
+        capabilities.setCapability(CapabilityMapper.DEVICE_UDID, this.deviceUdid);
+        capabilities.setCapability(CapabilityMapper.ORIENTATION, this.orientation);
+        capabilities.setCapability(CapabilityMapper.AUTO_WEB_VIEW, this.autoWebview);
+        capabilities.setCapability(CapabilityMapper.NO_RESET, this.noReset);
+        capabilities.setCapability(CapabilityMapper.FULL_RESET, this.fullReset);
+        capabilities.setCapability(CapabilityMapper.EVENT_TIMINGS, this.eventTimings);
+        capabilities.setCapability(CapabilityMapper.ENABLE_PERFORMANCE_LOGGING, this.enablePerformanceLogging);
+        capabilities.setCapability(CapabilityMapper.PRINT_PAGE_SOURCE_ON_FIND_FAILURE, this.printPageSourceOnFindFailure);
+        capabilities.setCapability(CapabilityMapper.CLEAR_SYSTEM_FILES, this.clearSystemFiles);
         return capabilities;
     }
 
