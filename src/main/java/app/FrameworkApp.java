@@ -1,14 +1,24 @@
 package app;
 
+import core.CapabilityBuilder;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.net.URL;
 
 public class FrameworkApp {
 
-
-    public DesiredCapabilities init(){
-        return new DesiredCapabilities();
+    public static void main(String[] args){
+        System.out.println("welcome to automation framework...");
     }
 
-    DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+    /*********** public methods ***********/
+    public void initFramework(){
+        System.out.println("framework initiated");
+    }
+    public void terminateFramework(){
+        System.out.println("stopping framework");
+    }
 
 }
